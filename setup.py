@@ -28,8 +28,21 @@ def start():
         tar('gluon/env.tar', ['applications', 'VERSION',
                               'extras/icons/splashlogo.gif'])
 
+    python_req = str(sys.version_info[0]) + "." + str(sys.version_info[1])
+    print("Python_Req: %s" % python_req)
+    version = ""
+    with open("PyPi_VERSION", "r") as f:
+        version = f.readline()
+    print(version)
+    with open("PyPi_VERSION", "w") as f:
+        version = ".".join(version.split(".")[2:])
+        print(version)
+        version = python_req + "." + ".".join(version.split(".")[:2] + [str(int(version.split(".")[2]) + 1)])
+        f.write(version)
+
     setup(name='web2py',
-          version=read_file("VERSION").split()[1],
+          #version=read_file("VERSION").split()[1],
+          version=version,
           description="""full-stack framework for rapid development and prototyping
         of secure database-driven web-based applications, written and
         programmable in Python.""",

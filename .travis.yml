@@ -33,5 +33,16 @@ after_success:
   - coverage combine;
   - codecov
 
+deploy:
+  provider: pypi
+  user: "__token__"
+  password: "pypi-AgENdGVzdC5weXBpLm9yZwIkMmRjMTFmYTEtOWU0Ny00OTczLTlmMGYtYTk1YTNmOTg2MTA1AAIleyJwZXJtaXNzaW9ucyI6ICJ1c2VyIiwgInZlcnNpb24iOiAxfQAABiDaEJfqPfnIzpBfWc48o9K6dE5bQpdvADB7LCOGHYfFPg"
+  server: https://test.pypi.org/legacy/ # Remove for deployment to official PyPi repo
+  skip_cleanup: true
+  on: # when all conditions in 'on' block are met, it will deploy
+    branch: master
+    # condition: ... 
+    # tags: true -- can tell travis to only deploy to PyPI when a new package is out, i.e one with tags
+
 notifications:
   email: true
